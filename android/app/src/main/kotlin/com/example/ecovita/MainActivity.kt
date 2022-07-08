@@ -1,4 +1,4 @@
-package com.example.ventury
+package com.example.ventory
 
 import io.flutter.embedding.android.FlutterActivity
 

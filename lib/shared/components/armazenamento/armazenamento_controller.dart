@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:ventury/shared/components/armazenamento/armazenamento_model.dart';
-import 'package:ventury/shared/controllers/base_controller.dart';
-import 'package:ventury/shared/services/armazenamento_service.dart';
+import 'package:ventory/shared/components/armazenamento/armazenamento_model.dart';
+import 'package:ventory/shared/controllers/base_controller.dart';
+import 'package:ventory/shared/services/armazenamento_service.dart';
 
 import '../dialogs.dart';
 

@@ -1,4 +1,4 @@
-# ventury
+# ventory
 
 A new Flutter project.
 

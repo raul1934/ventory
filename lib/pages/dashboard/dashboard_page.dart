@@ -1,4 +1,4 @@
-import 'package:ventury/shared/components/armazenamento/armazenamento.dart';
+import 'package:ventory/shared/components/armazenamento/armazenamento.dart';
 
 import '../../shared/components/drawer.dart';
 import '../../shared/controllers/app_controller.dart';
@@ -36,6 +36,7 @@ class DashboardPage extends StatelessWidget {
                 onPressed: () {
                   Get.to(() => ArmazenamentoComponent(
                         selectable: false,
+                        value: -1,
                       ));
                 },
                 icon: const Icon(Icons.account_tree)),

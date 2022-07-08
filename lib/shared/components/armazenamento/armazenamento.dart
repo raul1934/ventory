@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:animated_tree_view/animated_tree_view.dart';
 import 'package:get/get.dart';
-import 'package:ventury/constaints.dart';
-import 'package:ventury/shared/components/armazenamento/armazenamento_model.dart';
-import 'package:ventury/shared/components/primary_button.dart';
+import 'package:ventory/constaints.dart';
+import 'package:ventory/shared/components/armazenamento/armazenamento_model.dart';
+import 'package:ventory/shared/components/primary_button.dart';
 
 import 'armazenamento_controller.dart';
+import 'armazenamento_input_selector_model.dart';
 
 class ArmazenamentoComponent extends StatefulWidget {
   bool selectable;
-  ArmazenamentoComponent({Key? key, required this.selectable})
+  int value;
+  String text = "";
+  late ArmazenamentoIndexedNode selectedNode;
+  bool nodeFound = false;
+  ArmazenamentoComponent(
+      {Key? key, required this.selectable, required this.value})
       : super(key: key);
 
   @override
@@ -37,7 +43,10 @@ class _ArmazenamentoComponentState extends State<ArmazenamentoComponent> {
     await armazenamentoController.loadArmazenamentos();
     for (ArmazenamentoModel item
         in armazenamentoController.armazenamentoModel) {
-      initialNode.addAll(createNode(item));
+      ArmazenamentoIndexedNode i = ArmazenamentoIndexedNode(
+          armazenamentoModel: item, key: item.label.toString());
+      i.addAll(createNode(item));
+      initialNode.add(i);
     }
   }
 
@@ -76,14 +85,16 @@ class _ArmazenamentoComponentState extends State<ArmazenamentoComponent> {
                         initialItem: initialNode,
                         indentPadding: 15,
                         controller: controller,
-                        showRootNode: true,
+                        showRootNode: false,
                         padding: const EdgeInsets.all(0),
+
                         //expansionIndicator: null,
                         expansionBehavior:
                             ExpansionBehavior.collapseOthersAndSnapToTop,
                         shrinkWrap: true,
-                        builder: (context, level, item) =>
-                            buildListItem(level, item),
+                        builder: (context, level, item) => item.isRoot
+                            ? buildRootItem(level, item)
+                            : buildListItem(level, item),
                       ),
                     )
                   : const Expanded(
@@ -92,8 +103,21 @@ class _ArmazenamentoComponentState extends State<ArmazenamentoComponent> {
           ),
         ),
       ),
-      bottomSheet:
-          PrimaryButton(onPressed: () {}, child: const Text("Selecionar")),
+      bottomNavigationBar: widget.selectable
+          ? Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: PrimaryButton(
+                  onPressed: widget.value != -1
+                      ? () {
+                          Get.back(
+                              result: ArmazenamentoInputSelectorModel(
+                                  id: widget.value, text: widget.text));
+                        }
+                      : null,
+                  child: const Text("Selecionar")))
+          : Container(
+              height: 0,
+            ),
     );
   }
 
@@ -104,15 +128,41 @@ class _ArmazenamentoComponentState extends State<ArmazenamentoComponent> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           ListTile(
-            title: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(item.key),
-                buildAddItemChildButton(item),
-              ],
+            title: Text(
+              item.key,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: primaryColor,
+              ),
             ),
+            leading: widget.selectable
+                ? Transform.scale(
+                    scale: 1.3,
+                    child: Radio(
+                      focusColor: primaryColor,
+                      materialTapTargetSize: MaterialTapTargetSize.padded,
+                      value: item.armazenamentoModel.id,
+                      groupValue: widget.value,
+                      onChanged: (dynamic value) {
+                        setState(() {
+                          widget.value = value;
+                          widget.text =
+                              item.armazenamentoModel.label.toString();
+                        });
+                      },
+                      activeColor: Colors.green,
+                    ))
+                : null,
+            trailing: !widget.selectable
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      buildAddItemButton(item),
+                    ],
+                  )
+                : null,
           ),
         ],
       ),
@@ -121,12 +171,14 @@ class _ArmazenamentoComponentState extends State<ArmazenamentoComponent> {
 
   Widget buildListItem(int level, ArmazenamentoIndexedNode item) {
     return Card(
-      color: Colors.white,
+      color: Colors.white.withAlpha(((1 - (level * 0.1)) * 255).toInt()),
       child: ListTile(
         title: Text(
           item.key,
-          style:
-              const TextStyle(fontWeight: FontWeight.bold, color: primaryColor),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: primaryColor,
+          ),
         ),
         subtitle: Text('Nível $level'),
         dense: true,
@@ -137,8 +189,13 @@ class _ArmazenamentoComponentState extends State<ArmazenamentoComponent> {
                   focusColor: primaryColor,
                   materialTapTargetSize: MaterialTapTargetSize.padded,
                   value: item.armazenamentoModel.id,
-                  groupValue: 2,
-                  onChanged: (dynamic value) {},
+                  groupValue: widget.value,
+                  onChanged: (dynamic value) {
+                    setState(() {
+                      widget.value = value;
+                      widget.text = item.armazenamentoModel.label.toString();
+                    });
+                  },
                   activeColor: Colors.green,
                 ))
             : null,
@@ -245,20 +302,6 @@ class _ArmazenamentoComponentState extends State<ArmazenamentoComponent> {
             icon: const Icon(Icons.add_circle, color: Colors.green),
             onPressed: () => item.add(ArmazenamentoIndexedNode(
                 armazenamentoModel: ArmazenamentoModel(), key: ''))));
-  }
-
-  Widget buildClearAllItemButton(ArmazenamentoIndexedNode item) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16.0),
-      child: FlatButton.icon(
-          color: Colors.red[800],
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4)),
-          ),
-          icon: const Icon(Icons.delete, color: Colors.white),
-          label: const Text("Clear All", style: TextStyle(color: Colors.white)),
-          onPressed: () => item.clear()),
-    );
   }
 }
 

@@ -74,7 +74,10 @@ class PrimarySelect extends StatelessWidget {
       value: value,
       items: items.map((item) {
         return DropdownMenuItem(
-          child: Text(item.text),
+          child: Text(
+            item.text,
+            style: TextStyle(color: Colors.black),
+          ),
           value: item.value,
         );
       }).toList(),

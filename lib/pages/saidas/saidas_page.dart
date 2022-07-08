@@ -1,4 +1,4 @@
-import 'package:ventury/shared/components/armazenamento/armazenamento_input_selector.dart';
+import 'package:ventory/pages/saidas/saida/saida_page.dart';
 
 import '../../shared/components/primary_button.dart';
 
@@ -9,14 +9,17 @@ import 'package:get/get.dart';
 
 import '../../constaints.dart';
 
-class SaldoPage extends StatelessWidget {
-  const SaldoPage({Key? key}) : super(key: key);
+class SaidasPage extends StatelessWidget {
+  const SaidasPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    AppController _controller = Get.find<AppController>();
+
     return Scaffold(
         drawer: DrawerComponent(
-          selectedIndex: 1,
+          selectedIndex: 3,
         ),
         appBar: AppBar(
           backgroundColor: primaryColor,
@@ -32,7 +35,22 @@ class SaldoPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
-            children: [ArmazenamentoInputSelectorComponent(selectable: true)],
+            children: [
+              const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      "Saídas",
+                      style: h2stylePrimary,
+                      textAlign: TextAlign.center,
+                    ),
+                  )),
+              PrimaryButton(
+                child: const Text("Iniciar Saída"),
+                onPressed: () => Get.to(() => SaidaPage()),
+              )
+            ],
           ),
         ));
   }

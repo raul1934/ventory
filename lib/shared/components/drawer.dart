@@ -1,8 +1,11 @@
-import 'package:ventury/pages/saldo/saldo_page.dart';
+import 'package:ventory/pages/filter/filter_page.dart';
+import 'package:ventory/pages/saidas/saidas_page.dart';
 
 import '../../pages/dashboard/dashboard_page.dart';
 
 import '../../pages/entradas/entradas_page.dart';
+import '../../pages/filter/movimentation/movimentation_page.dart';
+import '../../pages/filter/saldo/saldo_page.dart';
 import '../../pages/splashscreen/splash_screen_page.dart';
 import '../../shared/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +100,7 @@ class DrawerComponent extends StatelessWidget {
                       fontSize: 20),
                 ),
                 onTap: selectedIndex != 2
-                    ? () => Get.off(() => const SaldoPage())
+                    ? () => Get.off(() => const FilterPage())
                     : null,
               ),
               ListTile(
@@ -116,7 +119,9 @@ class DrawerComponent extends StatelessWidget {
                           : textColorLigth,
                       fontSize: 20),
                 ),
-                onTap: () {},
+                onTap: selectedIndex != 3
+                    ? () => Get.off(() => const SaidasPage())
+                    : null,
               ),
               ListTile(
                 leading: const Icon(

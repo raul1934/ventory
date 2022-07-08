@@ -39,7 +39,7 @@ class EntradasPage extends StatelessWidget {
                   child: SizedBox(
                     width: double.infinity,
                     child: Text(
-                      "Inciar Recebimento",
+                      "Entradas",
                       style: h2stylePrimary,
                       textAlign: TextAlign.center,
                     ),
