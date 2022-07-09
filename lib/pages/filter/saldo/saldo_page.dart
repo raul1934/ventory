@@ -35,7 +35,7 @@ class SaldoPage extends StatelessWidget {
               return Container();
             }
 
-            if (!value.saldoFilterResult.value.success) {
+            if (value.saldoFilterResult.value.items == null) {
               return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
@@ -48,7 +48,7 @@ class SaldoPage extends StatelessWidget {
                               text: 'Filtro de Saldo',
                               style: TextStyle(
                                 fontSize: 26.0,
-                                color: Colors.black87,
+                                color: Colors.black54,
                               ))),
                       const SizedBox(
                         height: 20,
@@ -58,12 +58,13 @@ class SaldoPage extends StatelessWidget {
                           text: 'Para filtrar clique no icone  ',
                           style: TextStyle(
                             fontSize: 20.0,
-                            color: Colors.black87,
+                            color: Colors.black54,
                           ),
                           children: [
                             WidgetSpan(
                               child: Icon(
                                 Icons.filter_list,
+                                color: Colors.black54,
                               ),
                             ),
                             TextSpan(
@@ -77,12 +78,28 @@ class SaldoPage extends StatelessWidget {
                   ));
             }
 
-            if (value.saldoFilterResult.value.items == null) {
-              return Flex(
-                direction: Axis.vertical,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [Text("Nenhum item encontrado")],
-              );
+            if (value.saldoFilterResult.value.items!.isEmpty) {
+              return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Center(
+                      child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.error_outline,
+                        size: 64,
+                        color: Colors.black54,
+                      ),
+                      SizedBox(height: 20),
+                      Text('Nenhum item encontrado',
+                          style: TextStyle(
+                            fontSize: 22.0,
+                            color: Colors.black54,
+                          )),
+                    ],
+                  )));
             }
 
             return SingleChildScrollView(

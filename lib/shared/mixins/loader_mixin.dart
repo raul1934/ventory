@@ -32,7 +32,7 @@ mixin LoaderMixin on GetxController {
           useSafeArea: true,
         );
       } else {
-        Get.back();
+        Get.back(canPop: false);
       }
     });
   }

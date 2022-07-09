@@ -39,7 +39,7 @@ class SaldoFilterPage extends StatelessWidget {
               bottomNavigationBar: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: PrimaryButton(
-                      onPressed: !_controller.loading.value
+                      onPressed: _controller.botaoAtivo.value
                           ? () {
                               Get.back();
                               _controller.filtrar();

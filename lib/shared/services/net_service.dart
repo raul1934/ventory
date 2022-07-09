@@ -25,7 +25,7 @@ class NetService {
     if (token != null) {
       headers.addAll({"Authorization": "Bearer $token"});
     }
-    print(data);
+
     Uri uri = Uri.parse(url);
     return http
         .post(uri, body: data, headers: headers)

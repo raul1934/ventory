@@ -32,7 +32,7 @@ class _ArmazenamentoInputSelectorComponentState
 
   @override
   Widget build(BuildContext context) {
-    if (widget.value!.text != "") {
+    if (widget.value!.text != null) {
       widget._textEditingController.text = widget.value!.text.toString();
       widget._textEditingController.value =
           TextEditingValue(text: widget.value!.text.toString());
@@ -40,22 +40,23 @@ class _ArmazenamentoInputSelectorComponentState
 
     return TextFormField(
       controller: widget._textEditingController,
-      decoration: const InputDecoration(
-        labelStyle: TextStyle(),
-        focusedBorder: OutlineInputBorder(
+      decoration: InputDecoration(
+        labelStyle: const TextStyle(),
+        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: textColor, width: 1.0),
         ),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: textColor, width: 1.0),
         ),
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderSide: BorderSide(color: textColor, width: 1.0),
         ),
         focusColor: textColor,
         fillColor: textColor,
-        hintText: "Selecione o armazenamento",
-        labelText: "Armazenamento",
-        floatingLabelStyle: TextStyle(color: textColor),
+        labelText: widget.value!.text != null
+            ? "Armazenamento"
+            : "Selecione o armazenamento",
+        floatingLabelStyle: const TextStyle(color: textColor),
       ),
       validator: (value) =>
           value != "" ? null : "O armazenamento é obrigatório",
@@ -75,7 +76,10 @@ class _ArmazenamentoInputSelectorComponentState
             widget._textEditingController.text = ret.text.toString();
             widget._textEditingController.value =
                 TextEditingValue(text: ret.text.toString());
+            FocusScope.of(context).nextFocus();
           });
+        } else {
+          FocusScope.of(context).unfocus();
         }
       },
     );

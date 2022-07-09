@@ -14,6 +14,7 @@ class SaldoController extends BaseController with LoaderMixin {
   final produto = ProductInputSelectorModel(text: 'Todos', value: null).obs;
   final saldoFilterResult = SaldoFilterResult(success: false).obs;
   final storageItemsResult = StorageItemsResult(success: false).obs;
+  final botaoAtivo = false.obs;
 
   @override
   void onInit() {
@@ -24,6 +25,7 @@ class SaldoController extends BaseController with LoaderMixin {
   setArmazenamento(ArmazenamentoInputSelectorModel _armazenamento) {
     armazenamento(_armazenamento);
     setProduto(ProductInputSelectorModel(text: 'Todos', value: null));
+    botaoAtivo(true);
   }
 
   setProduto(ProductInputSelectorModel _productInputSelectorModel) {
@@ -63,6 +65,8 @@ class SaldoController extends BaseController with LoaderMixin {
     }
 
     saldoFilterResult(SaldoFilterResult.fromJson(result));
+    loading(false);
+    update(['SaldoListBuilder']);
 
     if (!saldoFilterResult.value.success) {
       Get.snackbar(
@@ -70,9 +74,5 @@ class SaldoController extends BaseController with LoaderMixin {
           icon: const Icon(Icons.align_vertical_bottom, color: Colors.red),
           snackPosition: SnackPosition.BOTTOM);
     }
-
-    update(['SaldoListBuilder']);
-
-    loading(false);
   }
 }

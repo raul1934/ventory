@@ -40,7 +40,7 @@ class MovimentationFilterPage extends StatelessWidget {
               bottomNavigationBar: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: PrimaryButton(
-                      onPressed: !_controller.loading.value
+                      onPressed: _controller.botaoAtivo.value
                           ? () {
                               Get.back();
                               _controller.filtrar();
@@ -78,36 +78,38 @@ class MovimentationFilterPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                    onTap: () async {
-                      var ret = await showDatePicker(
-                          context: context,
-                          firstDate: DateTime(2022, 1, 1),
-                          initialDate: DateTime.now(),
-                          lastDate: DateTime(2030, 12, 29));
-                      FocusScope.of(context).nextFocus();
-                    },
-                    readOnly: true,
-                    decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.calendar_month),
-                        labelText: 'Vencimento'),
-                    validator: (value) {},
-                    onSaved: (val) {}),
+                  onTap: () async {
+                    var ret = await showDatePicker(
+                        context: context,
+                        firstDate: DateTime(2022, 1, 1),
+                        initialDate: _controller.dataInicial.value,
+                        lastDate: DateTime(2030, 12, 29));
+                    _controller.setDataInicial(ret);
+                    FocusScope.of(context).nextFocus();
+                  },
+                  controller: _controller.dateInicialTextEdittingController,
+                  readOnly: true,
+                  decoration: const InputDecoration(
+                      suffixIcon: Icon(Icons.calendar_month),
+                      labelText: 'Data Inicial'),
+                ),
                 const SizedBox(height: 20),
                 TextFormField(
-                    onTap: () async {
-                      var ret = await showDatePicker(
-                          context: context,
-                          firstDate: DateTime(2022, 1, 1),
-                          initialDate: DateTime.now(),
-                          lastDate: DateTime(2030, 12, 29));
-                      FocusScope.of(context).nextFocus();
-                    },
-                    readOnly: true,
-                    decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.calendar_month),
-                        labelText: 'Vencimento'),
-                    validator: (value) {},
-                    onSaved: (val) {}),
+                  onTap: () async {
+                    var ret = await showDatePicker(
+                        context: context,
+                        firstDate: DateTime(2022, 1, 1),
+                        initialDate: _controller.dataInicial.value,
+                        lastDate: DateTime(2030, 12, 29));
+                    _controller.setDataFinal(ret);
+                    FocusScope.of(context).nextFocus();
+                  },
+                  readOnly: true,
+                  controller: _controller.dateFinalTextEdittingController,
+                  decoration: const InputDecoration(
+                      suffixIcon: Icon(Icons.calendar_month),
+                      labelText: 'Data Final'),
+                ),
               ],
             )));
   }

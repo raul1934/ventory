@@ -53,10 +53,9 @@ class _ProductInputSelectorComponentState
         labelText: "Produtos",
       ),
       enabled: widget.items.length > 1,
-      cursorColor: textColor,
-      style: const TextStyle(),
       textInputAction: TextInputAction.next,
       readOnly: true,
+      validator: (value) => value != "" ? null : "O produto é obrigatório",
       onTap: () async {
         ProductInputSelectorModel? ret = await Get.to(() =>
             ProductListComponent(
@@ -69,7 +68,10 @@ class _ProductInputSelectorComponentState
             widget._textEditingController.text = ret.text;
             widget._textEditingController.value =
                 TextEditingValue(text: ret.text.toString());
+            FocusScope.of(context).nextFocus();
           });
+        } else {
+          FocusScope.of(context).unfocus();
         }
       },
     );

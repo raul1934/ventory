@@ -11,8 +11,8 @@ class MovimentationFilterResult {
     success = json['success'];
     message = json['message'];
     language = json['language'];
+    items = <Items>[];
     if (json['data'] != null) {
-      items = <Items>[];
       json['data'].forEach((v) {
         items!.add(Items.fromJson(v));
       });

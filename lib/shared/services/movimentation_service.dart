@@ -5,7 +5,12 @@ import '../../shared/services/net_service.dart';
 import '../../constaints.dart';
 
 class MovimentationService {
-  filter(int armazenamento, int? itemId) {
+  filter(
+    int armazenamento,
+    String dataInicial,
+    String dataFinal,
+    int? itemId,
+  ) {
     var storage = GetStorage();
     var language = storage.read("language");
 
@@ -13,6 +18,9 @@ class MovimentationService {
     if (itemId != 0) {
       url += "&item_id=$itemId";
     }
+
+    url += "&date_ini=$dataInicial";
+    url += "&date_end=$dataFinal";
 
     url += "&lang=$language";
 

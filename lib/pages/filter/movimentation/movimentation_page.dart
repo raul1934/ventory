@@ -38,7 +38,7 @@ class MovimentationPage extends StatelessWidget {
               return Container();
             }
 
-            if (!value.movimentationFilterResult.value.success) {
+            if (value.movimentationFilterResult.value.items == null) {
               return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
@@ -51,7 +51,7 @@ class MovimentationPage extends StatelessWidget {
                               text: 'Filtro de Movimentações',
                               style: TextStyle(
                                 fontSize: 26.0,
-                                color: Colors.black87,
+                                color: Colors.black54,
                               ))),
                       const SizedBox(
                         height: 20,
@@ -61,12 +61,13 @@ class MovimentationPage extends StatelessWidget {
                           text: 'Para filtrar clique no icone  ',
                           style: TextStyle(
                             fontSize: 20.0,
-                            color: Colors.black87,
+                            color: Colors.black54,
                           ),
                           children: [
                             WidgetSpan(
                               child: Icon(
                                 Icons.filter_list,
+                                color: Colors.black54,
                               ),
                             ),
                             TextSpan(
@@ -80,12 +81,28 @@ class MovimentationPage extends StatelessWidget {
                   ));
             }
 
-            if (value.movimentationFilterResult.value.items == null) {
-              return Flex(
-                direction: Axis.vertical,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [Text("Nenhum item encontrado")],
-              );
+            if (value.movimentationFilterResult.value.items!.isEmpty) {
+              return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Center(
+                      child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.error_outline,
+                        size: 64,
+                        color: Colors.black54,
+                      ),
+                      SizedBox(height: 20),
+                      Text('Nenhum item encontrado',
+                          style: TextStyle(
+                            fontSize: 22.0,
+                            color: Colors.black54,
+                          )),
+                    ],
+                  )));
             }
 
             return SingleChildScrollView(

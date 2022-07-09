@@ -1,7 +1,5 @@
 import 'package:ventory/pages/saidas/saida/saida_page.dart';
-
 import '../../shared/components/primary_button.dart';
-
 import '../../shared/components/drawer.dart';
 import '../../shared/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +13,6 @@ class SaidasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    AppController _controller = Get.find<AppController>();
 
     return Scaffold(
         drawer: DrawerComponent(
