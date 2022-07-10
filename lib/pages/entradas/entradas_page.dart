@@ -1,9 +1,8 @@
-import '../../shared/components/primary_button.dart';
-
-import '../../shared/components/drawer.dart';
-import '../../shared/controllers/app_controller.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ventory/pages/entradas/por_nota_fiscal/por_nota_fiscal_page.dart';
+import 'package:flutter/material.dart';
+import 'package:ventory/shared/components/drawer.dart';
+import 'package:ventory/shared/components/primary_button.dart';
 
 import '../../constaints.dart';
 
@@ -12,9 +11,6 @@ class EntradasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    AppController _controller = Get.find<AppController>();
-
     return Scaffold(
         drawer: DrawerComponent(
           selectedIndex: 1,
@@ -46,7 +42,7 @@ class EntradasPage extends StatelessWidget {
                   )),
               PrimaryButton(
                 child: const Text("PELO CÓDIGO NF"),
-                onPressed: () {},
+                onPressed: () => Get.to(() => PorNotaFiscalPage()),
               )
             ],
           ),

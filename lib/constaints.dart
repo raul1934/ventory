@@ -18,3 +18,4 @@ const h2stylePrimary =
 
 const DRS_AUTH_URL = "http://auth.shield.srv.br";
 const ASTRA_URL_API = "http://vtastra-api-qualy.shield.srv.br/v1";
+const SHIELD_SHIPS_API = "http://ships.shield.srv.br/v1";

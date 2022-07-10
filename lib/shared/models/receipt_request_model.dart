@@ -5,7 +5,7 @@ class ReceiptRequestModel {
   String? comments;
   String? temperature;
   String? moreInfo;
-  List<Items>? items;
+  List<ReceiptRequestModelItem>? items;
   String? lang;
 
   ReceiptRequestModel(
@@ -26,48 +26,48 @@ class ReceiptRequestModel {
     temperature = json['temperature'];
     moreInfo = json['more_info'];
     if (json['items'] != null) {
-      items = <Items>[];
+      items = <ReceiptRequestModelItem>[];
       json['items'].forEach((v) {
-        items!.add(new Items.fromJson(v));
+        items!.add(ReceiptRequestModelItem.fromJson(v));
       });
     }
     lang = json['lang'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['invoice'] = this.invoice;
-    data['storage_id'] = this.storageId;
-    data['package'] = this.package;
-    data['comments'] = this.comments;
-    data['temperature'] = this.temperature;
-    data['more_info'] = this.moreInfo;
-    if (this.items != null) {
-      data['items'] = this.items!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['invoice'] = invoice;
+    data['storage_id'] = storageId;
+    data['package'] = package;
+    data['comments'] = comments;
+    data['temperature'] = temperature;
+    data['more_info'] = moreInfo;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
     }
-    data['lang'] = this.lang;
+    data['lang'] = lang;
     return data;
   }
 }
 
-class Items {
+class ReceiptRequestModelItem {
   String? cProd;
   String? name;
   String? amount;
 
-  Items({this.cProd, this.name, this.amount});
+  ReceiptRequestModelItem({this.cProd, this.name, this.amount});
 
-  Items.fromJson(Map<String, dynamic> json) {
+  ReceiptRequestModelItem.fromJson(Map<String, dynamic> json) {
     cProd = json['cProd'];
-    name = json['name'];
-    amount = json['amount'];
+    name = json['xProd'];
+    amount = json['qCom'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['cProd'] = this.cProd;
-    data['name'] = this.name;
-    data['amount'] = this.amount;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['cProd'] = cProd;
+    data['name'] = name;
+    data['amount'] = amount;
     return data;
   }
 }

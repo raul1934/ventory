@@ -15,7 +15,10 @@ class PrimaryButton extends StatelessWidget {
     return SizedBox(
       height: 50,
       width: size.width * 0.7,
-      child: ElevatedButton(onPressed: onPressed, child: child),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: child,
+      ),
     );
   }
 }

@@ -8,14 +8,21 @@ class NetService {
     var token = storage.read("token");
     var headers = <String, String>{};
     if (token != null) {
-      headers.addAll({"Authorization": "Bearer $token"});
+      headers.addAll({
+        "Authorization": "Bearer $token",
+        "content-type": "application/json"
+      });
     }
 
     Uri uri = Uri.parse(url);
     return http
         .get(uri, headers: headers)
         .then((response) => jsonDecode(response.body))
-        .catchError((err) => jsonDecode(err));
+        .catchError((err) => {
+              "success": false,
+              "message":
+                  "Houve um problema ao processar a requisição, provavelmente você está sem internet. Caso o problema continue entre em contato com o suporte."
+            });
   }
 
   static Future post(String url, dynamic data) {
@@ -23,14 +30,21 @@ class NetService {
     var token = storage.read("token");
     var headers = <String, String>{};
     if (token != null) {
-      headers.addAll({"Authorization": "Bearer $token"});
+      headers.addAll({
+        "Authorization": "Bearer $token",
+        "content-type": "application/json"
+      });
     }
 
     Uri uri = Uri.parse(url);
     return http
-        .post(uri, body: data, headers: headers)
+        .post(uri, body: jsonEncode(data), headers: headers)
         .then((response) => jsonDecode(response.body))
-        .catchError((err) => jsonDecode(err));
+        .catchError((err) => {
+              "success": false,
+              "message":
+                  "Houve um problema ao processar a requisição, provavelmente você está sem internet. Caso o problema continue entre em contato com o suporte."
+            });
   }
 
   static Future put(String url, dynamic data) {
@@ -38,14 +52,21 @@ class NetService {
     var token = storage.read("token");
     var headers = <String, String>{};
     if (token != null) {
-      headers.addAll({"Authorization": "Bearer $token"});
+      headers.addAll({
+        "Authorization": "Bearer $token",
+        "content-type": "application/json"
+      });
     }
 
     Uri uri = Uri.parse(url);
     return http
-        .put(uri, body: data, headers: headers)
+        .put(uri, body: jsonEncode(data), headers: headers)
         .then((response) => jsonDecode(response.body))
-        .catchError((err) => jsonDecode(err));
+        .catchError((err) => {
+              "success": false,
+              "message":
+                  "Houve um problema ao processar a requisição, provavelmente você está sem internet. Caso o problema continue entre em contato com o suporte."
+            });
   }
 
   static Future delete(String url) {
@@ -53,13 +74,20 @@ class NetService {
     var token = storage.read("token");
     var headers = <String, String>{};
     if (token != null) {
-      headers.addAll({"Authorization": "Bearer $token"});
+      headers.addAll({
+        "Authorization": "Bearer $token",
+        "content-type": "application/json"
+      });
     }
 
     Uri uri = Uri.parse(url);
     return http
         .delete(uri, headers: headers)
         .then((response) => jsonDecode(response.body))
-        .catchError((err) => jsonDecode(err));
+        .catchError((err) => {
+              "success": false,
+              "message":
+                  "Houve um problema ao processar a requisição, provavelmente você está sem internet. Caso o problema continue entre em contato com o suporte."
+            });
   }
 }
