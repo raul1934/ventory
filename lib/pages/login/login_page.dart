@@ -1,7 +1,6 @@
 import '../../constaints.dart';
 import '../../pages/login/login_controller.dart';
 import '../../shared/components/logo.dart';
-import '../../shared/components/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,41 +92,43 @@ class LoginPage extends StatelessWidget {
                         height: 10,
                       ),
                       TextFormField(
-                        initialValue: "123456",
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          labelStyle: TextStyle(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: textColor, width: 1.0),
+                          initialValue: "123456",
+                          obscureText: true,
+                          decoration: const InputDecoration(
+                            labelStyle: TextStyle(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: textColor, width: 1.0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: textColor, width: 1.0),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: textColor, width: 1.0),
+                            ),
+                            focusColor: textColor,
+                            fillColor: textColor,
+                            labelText: 'Senha',
+                            floatingLabelStyle: TextStyle(color: textColor),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: textColor, width: 1.0),
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: textColor, width: 1.0),
-                          ),
-                          focusColor: textColor,
-                          fillColor: textColor,
-                          labelText: 'Senha',
-                          floatingLabelStyle: TextStyle(color: textColor),
-                        ),
-                        cursorColor: textColor,
-                        keyboardType: TextInputType.visiblePassword,
-                        style: const TextStyle(),
-                        focusNode: _passwordFocusNode,
-                        onSaved: (text) =>
-                            _loginController.setPassword(text.toString()),
-                      ),
+                          cursorColor: textColor,
+                          keyboardType: TextInputType.visiblePassword,
+                          style: const TextStyle(),
+                          focusNode: _passwordFocusNode,
+                          onSaved: (text) {
+                            _loginController.setPassword(text.toString());
+                          }),
                       SizedBox(
                         height: size.height * 0.05,
                       ),
-                      Obx(() => PrimaryButton(
+                      Obx(() => ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
+                              print(_loginController.email.value);
+
                               _loginController.login();
                             }
                           },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector_model.dart';
+import 'package:ventory/shared/components/dialogs.dart';
 import 'package:ventory/shared/components/products/armazenamento_input_selector_model.dart';
 import 'package:ventory/shared/controllers/base_controller.dart';
 import 'package:ventory/shared/mixins/loader_mixin.dart';
@@ -48,17 +49,19 @@ class MovimentionController extends BaseController with LoaderMixin {
     loading(true);
     ProductService saldoService = ProductService();
     var result = await saldoService.loadProducts(armazenamento.value.id!);
+    loading(false);
 
-    storageItemsResult(StorageItemsResult.fromJson(result));
+    if (!result["error"]) {
+      storageItemsResult(StorageItemsResult.fromJson(result));
 
-    if (!storageItemsResult.value.success) {
-      Get.snackbar("Houve um problema",
-          movimentationFilterResult.value.message.toString(),
-          icon: const Icon(Icons.align_vertical_bottom, color: Colors.red),
-          snackPosition: SnackPosition.BOTTOM);
+      if (!storageItemsResult.value.success) {
+        Dialogs.showErrorDialog("Houve um problema",
+            movimentationFilterResult.value.message.toString());
+      }
+    } else {
+      Dialogs.showResponseDialog(result["exception"]);
     }
 
-    loading(false);
     update(['MovimentationFilterBuilder']);
   }
 
@@ -94,17 +97,19 @@ class MovimentionController extends BaseController with LoaderMixin {
       result = await saldoService.filter(
           armazenamento.value.id!, data_ini, data_end, 0);
     }
-
-    movimentationFilterResult(MovimentationFilterResult.fromJson(result));
-
     loading(false);
-    update(['MovimentationListBuilder']);
 
-    if (!movimentationFilterResult.value.success) {
-      Get.snackbar("Houve um problema",
-          movimentationFilterResult.value.message.toString(),
-          icon: const Icon(Icons.align_vertical_bottom, color: Colors.red),
-          snackPosition: SnackPosition.BOTTOM);
+    if (!result["error"]) {
+      movimentationFilterResult(MovimentationFilterResult.fromJson(result));
+
+      if (!movimentationFilterResult.value.success) {
+        Dialogs.showErrorDialog("Houve um problema",
+            movimentationFilterResult.value.message.toString());
+      }
+    } else {
+      Dialogs.showResponseDialog(result["exception"]);
     }
+
+    update(['MovimentationListBuilder']);
   }
 }

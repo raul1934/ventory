@@ -1,5 +1,5 @@
 import 'package:ventory/pages/saidas/saida/saida_page.dart';
-import '../../shared/components/primary_button.dart';
+
 import '../../shared/components/drawer.dart';
 import '../../shared/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
@@ -43,10 +43,11 @@ class SaidasPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   )),
-              PrimaryButton(
-                child: const Text("Iniciar Saída"),
-                onPressed: () => Get.to(() => SaidaPage()),
-              )
+              SizedBox(
+                  child: ElevatedButton(
+                      onPressed: () => Get.to(() => SaidaPage()),
+                      child: const Text("Iniciar Saída")),
+                  width: size.width * 0.9)
             ],
           ),
         ));

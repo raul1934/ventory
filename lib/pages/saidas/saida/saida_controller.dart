@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ventory/pages/saidas/saida/models/saida_result.dart';
 import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector_model.dart';
+import 'package:ventory/shared/components/dialogs.dart';
 import 'package:ventory/shared/components/products/armazenamento_input_selector_model.dart';
 import 'package:ventory/shared/controllers/base_controller.dart';
 import 'package:ventory/shared/mixins/loader_mixin.dart';
@@ -65,10 +66,14 @@ class SaidaController extends BaseController with LoaderMixin {
     update(['SaidaBuilder']);
     ProductService saldoService = ProductService();
     var result = await saldoService.loadProducts(armazenamento.value.id!);
-
-    storageItemsResult(StorageItemsResult.fromJson(result));
-
     loading(false);
+
+    if (!result["error"]) {
+      storageItemsResult(StorageItemsResult.fromJson(result));
+    } else {
+      Dialogs.showResponseDialog(result["exception"]);
+    }
+
     update(['SaidaBuilder']);
   }
 
@@ -84,22 +89,23 @@ class SaidaController extends BaseController with LoaderMixin {
         expires_at,
         quantidade.value,
         codPaciente.value.toString());
-
-    saidaResult(SaidaResult.fromJson(result));
-
     loading(false);
-    update(['SaidaBuilder']);
+    if (!result["error"]) {
+      saidaResult(SaidaResult.fromJson(result));
 
-    if (saidaResult.value.success) {
-      Get.back();
-      Get.snackbar("Sucesso!", saidaResult.value.message.toString(),
-          icon: const Icon(Icons.check_circle_outlined, color: Colors.green),
-          snackPosition: SnackPosition.BOTTOM);
+      if (saidaResult.value.success) {
+        Get.back();
+        Dialogs.showSuccessDialog(
+            "Sucesso!", saidaResult.value.message.toString());
+      } else {
+        Dialogs.showErrorDialog(
+            "Houve um problema", saidaResult.value.message.toString());
+      }
     } else {
-      Get.snackbar("Houve um problema", saidaResult.value.message.toString(),
-          icon: const Icon(Icons.error_outline_outlined, color: Colors.red),
-          snackPosition: SnackPosition.BOTTOM);
+      Dialogs.showResponseDialog(result["exception"]);
     }
+
+    update(['SaidaBuilder']);
   }
 
   showConfirm() async {

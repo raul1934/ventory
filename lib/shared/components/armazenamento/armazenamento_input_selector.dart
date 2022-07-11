@@ -40,23 +40,22 @@ class _ArmazenamentoInputSelectorComponentState
 
     return TextFormField(
       controller: widget._textEditingController,
-      decoration: InputDecoration(
-        labelStyle: const TextStyle(),
-        focusedBorder: const OutlineInputBorder(
+      decoration: const InputDecoration(
+        labelStyle: TextStyle(),
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: textColor, width: 1.0),
         ),
-        enabledBorder: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: textColor, width: 1.0),
         ),
-        border: const OutlineInputBorder(
+        border: OutlineInputBorder(
           borderSide: BorderSide(color: textColor, width: 1.0),
         ),
         focusColor: textColor,
         fillColor: textColor,
-        labelText: widget.value!.text != null
-            ? "Armazenamento"
-            : "Selecione o armazenamento",
-        floatingLabelStyle: const TextStyle(color: textColor),
+        hintText: "Selecione o armazenamento",
+        labelText: "Armazenamento",
+        floatingLabelStyle: TextStyle(color: textColor),
       ),
       validator: (value) =>
           value != "" ? null : "O armazenamento é obrigatório",

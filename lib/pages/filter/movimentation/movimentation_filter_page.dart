@@ -3,7 +3,7 @@ import 'package:ventory/constaints.dart';
 import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:ventory/shared/components/loader.dart';
-import 'package:ventory/shared/components/primary_button.dart';
+
 import 'package:ventory/shared/components/products/armazenamento_input_selector.dart';
 import 'package:ventory/shared/components/products/armazenamento_input_selector_model.dart';
 import 'movimentation_controller.dart';
@@ -39,14 +39,14 @@ class MovimentationFilterPage extends StatelessWidget {
                   child: buildBody(_controller, items, context)),
               bottomNavigationBar: Padding(
                   padding: const EdgeInsets.all(4.0),
-                  child: PrimaryButton(
+                  child: ElevatedButton(
                       onPressed: _controller.botaoAtivo.value
                           ? () {
                               Get.back();
                               _controller.filtrar();
                             }
                           : null,
-                      child: const Text("Fitrar"))));
+                      child: const Text("filtrar"))));
         });
   }
 

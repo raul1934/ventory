@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:ventory/pages/entradas/por_nota_fiscal/por_nota_fiscal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ventory/shared/components/drawer.dart';
-import 'package:ventory/shared/components/primary_button.dart';
 
 import '../../constaints.dart';
 
@@ -11,6 +10,7 @@ class EntradasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         drawer: DrawerComponent(
           selectedIndex: 1,
@@ -40,10 +40,12 @@ class EntradasPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   )),
-              PrimaryButton(
-                child: const Text("PELO CÓDIGO NF"),
-                onPressed: () => Get.to(() => PorNotaFiscalPage()),
-              )
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                  child: ElevatedButton(
+                    child: const Text("PELO CÓDIGO NF"),
+                    onPressed: () => Get.to(() => PorNotaFiscalPage()),
+                  ))
             ],
           ),
         ));

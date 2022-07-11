@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         title: 'ventory Plus',
-        home: const SplashScreenPage(),
+        home: SplashScreenPage(),
         initialBinding: AppBinding(),
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.rightToLeftWithFade,
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
         getPages: [
           GetPage(
             name: '/',
-            page: () => const SplashScreenPage(),
+            page: () => SplashScreenPage(),
           ),
           GetPage(
             name: '/login',
@@ -82,6 +82,12 @@ class MyApp extends StatelessWidget {
             primaryColor: ventory,
             colorScheme: const ColorScheme.light(primary: primaryColor),
             visualDensity: VisualDensity.adaptivePlatformDensity,
+            elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ButtonStyle(
+                    textStyle: MaterialStateProperty.all(const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold)),
+                    minimumSize: MaterialStateProperty.all(
+                        const Size(double.maxFinite, 50)))),
             inputDecorationTheme: const InputDecorationTheme(
               labelStyle: TextStyle(),
               focusedBorder: OutlineInputBorder(

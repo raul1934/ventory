@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ventory/pages/entradas/por_nota_fiscal/models/nota_fiscal_result.dart';
 import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector_model.dart';
+import 'package:ventory/shared/components/dialogs.dart';
 import 'package:ventory/shared/controllers/base_controller.dart';
 import 'package:ventory/shared/mixins/loader_mixin.dart';
 import 'package:ventory/shared/models/receipt_request_model.dart';
@@ -55,20 +56,21 @@ class PorNotaFiscalController extends BaseController with LoaderMixin {
 
   checkNota() async {
     loading(true);
-
-    notaFiscalResult(NotaFiscalResult.fromJson(
-        await _entradasPorNotaFiscalService.getInvoice(nota.value)));
-
+    var result = await _entradasPorNotaFiscalService.getInvoice(nota.value);
     loading(false);
 
-    if (notaFiscalResult.value.success) {
-      pageController.animateToPage(1,
-          duration: const Duration(milliseconds: 300), curve: Curves.linear);
+    if (!result["error"]) {
+      notaFiscalResult(NotaFiscalResult.fromJson(result));
+
+      if (notaFiscalResult.value.success) {
+        pageController.animateToPage(1,
+            duration: const Duration(milliseconds: 300), curve: Curves.linear);
+      } else {
+        Dialogs.showErrorDialog(
+            "Houve um problema", notaFiscalResult.value.message.toString());
+      }
     } else {
-      Get.snackbar(
-          "Houve um problema", notaFiscalResult.value.message.toString(),
-          icon: const Icon(Icons.error_outline_outlined, color: Colors.red),
-          snackPosition: SnackPosition.BOTTOM);
+      Dialogs.showResponseDialog(result["exception"]);
     }
   }
 
@@ -118,22 +120,23 @@ class PorNotaFiscalController extends BaseController with LoaderMixin {
         .map((e) => ReceiptRequestModelItem.fromJson(e.toJson()))
         .toList();
 
-    receiptResponse(ReceiptResponseModel.fromJson(
-        await _entradasPorNotaFiscalService
-            .receiptInvoice(receiptRequestModel)));
+    var result =
+        await _entradasPorNotaFiscalService.receiptInvoice(receiptRequestModel);
+    if (!result["error"]) {
+      receiptResponse(ReceiptResponseModel.fromJson(result));
 
-    loading(false);
+      loading(false);
 
-    if (receiptResponse.value.success) {
-      Get.back();
-      Get.snackbar("Sucesso!", receiptResponse.value.message.toString(),
-          icon: const Icon(Icons.check_circle_outlined, color: Colors.green),
-          snackPosition: SnackPosition.BOTTOM);
+      if (receiptResponse.value.success) {
+        Get.back();
+        Dialogs.showSuccessDialog(
+            "Sucesso!", receiptResponse.value.message.toString());
+      } else {
+        Dialogs.showErrorDialog(
+            "Houve um problema", receiptResponse.value.message.toString());
+      }
     } else {
-      Get.snackbar(
-          "Houve um problema", receiptResponse.value.message.toString(),
-          icon: const Icon(Icons.error_outline_outlined, color: Colors.red),
-          snackPosition: SnackPosition.BOTTOM);
+      Dialogs.showResponseDialog(result["exception"]);
     }
   }
 }

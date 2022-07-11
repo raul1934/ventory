@@ -1,7 +1,8 @@
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ventory/shared/components/dialogs.dart';
 import '../../pages/dashboard/dashboard_page.dart';
 import '../../shared/controllers/app_controller.dart';
 import '../../shared/services/login_service.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
@@ -24,23 +25,27 @@ class LoginController extends GetxController {
 
     LoginService loginService = LoginService();
     var result = await loginService.login(email.value, password.value);
-
-    message(result['message']);
-    success(result['success']);
-
-    Get.snackbar(
-        success.value ? "Sucesso!" : "Houve um problema", message.value,
-        icon: success.value
-            ? const Icon(Icons.check, color: Colors.green)
-            : const Icon(Icons.align_vertical_bottom, color: Colors.red),
-        snackPosition: SnackPosition.BOTTOM);
-
     loading(false);
 
-    if (success.value == true) {
-      AppController _controller = Get.find<AppController>();
-      _controller.setData(result);
-      Get.off(() => const DashboardPage());
+    if (!result["error"]) {
+      message(result['message']);
+      success(result['success']);
+
+      if (success.value) {
+        Dialogs.showSuccessDialog("Sucesso!", message.value);
+        AppController _controller = Get.find<AppController>();
+        _controller.setData(result);
+        final SharedPreferences _prefs = await SharedPreferences.getInstance();
+
+        _prefs.setString("email", email.value);
+        _prefs.setString("password", password.value);
+
+        Get.off(() => const DashboardPage());
+      } else {
+        Dialogs.showErrorDialog("Houve um problema", message.value);
+      }
+    } else {
+      Dialogs.showResponseDialog(result["exception"]);
     }
   }
 }

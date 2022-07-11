@@ -5,6 +5,7 @@ class LoginService {
   login(String email, String password) {
     String url = DRS_AUTH_URL + "/api/v1/auth";
     Map<String, dynamic> data = {
+      "email": email,
       "username": email,
       "password": password,
     };

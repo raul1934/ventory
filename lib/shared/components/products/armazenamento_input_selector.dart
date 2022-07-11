@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constaints.dart';
-import '../primary_button.dart';
 import 'armazenamento_input_selector_model.dart';
 
 class ProductInputSelectorComponent extends StatefulWidget {
@@ -148,7 +147,7 @@ class _ProductListComponentState extends State<ProductListComponent> {
       ),
       bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(4.0),
-          child: PrimaryButton(
+          child: ElevatedButton(
               onPressed: () {
                 Get.back(result: _selectorModel);
               },

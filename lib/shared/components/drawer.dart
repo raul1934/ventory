@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ventory/pages/filter/filter_page.dart';
 import 'package:ventory/pages/saidas/saidas_page.dart';
 
@@ -133,8 +134,11 @@ class DrawerComponent extends StatelessWidget {
                   'Sair',
                   style: TextStyle(color: textColorLigth, fontSize: 20),
                 ),
-                onTap: () {
-                  Get.off(() => const SplashScreenPage());
+                onTap: () async {
+                  final SharedPreferences _prefs =
+                      await SharedPreferences.getInstance();
+                  _prefs.clear();
+                  Get.off(() => SplashScreenPage());
                 },
               )
             ],

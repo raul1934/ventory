@@ -3,7 +3,6 @@ import 'package:animated_tree_view/animated_tree_view.dart';
 import 'package:get/get.dart';
 import 'package:ventory/constaints.dart';
 import 'package:ventory/shared/components/armazenamento/armazenamento_model.dart';
-import 'package:ventory/shared/components/primary_button.dart';
 
 import 'armazenamento_controller.dart';
 import 'armazenamento_input_selector_model.dart';
@@ -106,7 +105,7 @@ class _ArmazenamentoComponentState extends State<ArmazenamentoComponent> {
       bottomNavigationBar: widget.selectable
           ? Padding(
               padding: const EdgeInsets.all(4.0),
-              child: PrimaryButton(
+              child: ElevatedButton(
                   onPressed: widget.value != -1
                       ? () {
                           Get.back(

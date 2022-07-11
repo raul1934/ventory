@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector_model.dart';
+import 'package:ventory/shared/components/dialogs.dart';
 import 'package:ventory/shared/components/products/armazenamento_input_selector_model.dart';
 import 'package:ventory/shared/controllers/base_controller.dart';
 import 'package:ventory/shared/mixins/loader_mixin.dart';
@@ -37,17 +38,19 @@ class SaldoController extends BaseController with LoaderMixin {
     loading(true);
     ProductService saldoService = ProductService();
     var result = await saldoService.loadProducts(armazenamento.value.id!);
+    loading(false);
 
-    storageItemsResult(StorageItemsResult.fromJson(result));
+    if (!result["error"]) {
+      storageItemsResult(StorageItemsResult.fromJson(result));
 
-    if (!storageItemsResult.value.success) {
-      Get.snackbar(
-          "Houve um problema", saldoFilterResult.value.message.toString(),
-          icon: const Icon(Icons.align_vertical_bottom, color: Colors.red),
-          snackPosition: SnackPosition.BOTTOM);
+      if (!storageItemsResult.value.success) {
+        Dialogs.showErrorDialog(
+            "Houve um problema", saldoFilterResult.value.message.toString());
+      }
+    } else {
+      Dialogs.showResponseDialog(result["exception"]);
     }
 
-    loading(false);
     update(['SaldoFilterBuilder']);
   }
 
@@ -63,16 +66,20 @@ class SaldoController extends BaseController with LoaderMixin {
     } else {
       result = await saldoService.filter(armazenamento.value.id!, 0);
     }
-
-    saldoFilterResult(SaldoFilterResult.fromJson(result));
     loading(false);
-    update(['SaldoListBuilder']);
+    if (!result["error"]) {
+      saldoFilterResult(SaldoFilterResult.fromJson(result));
 
-    if (!saldoFilterResult.value.success) {
-      Get.snackbar(
-          "Houve um problema", saldoFilterResult.value.message.toString(),
-          icon: const Icon(Icons.align_vertical_bottom, color: Colors.red),
-          snackPosition: SnackPosition.BOTTOM);
+      if (!saldoFilterResult.value.success) {
+        Get.snackbar(
+            "Houve um problema", saldoFilterResult.value.message.toString(),
+            icon: const Icon(Icons.align_vertical_bottom, color: Colors.red),
+            snackPosition: SnackPosition.BOTTOM);
+      }
+    } else {
+      Dialogs.showResponseDialog(result["exception"]);
     }
+
+    update(['SaldoListBuilder']);
   }
 }

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:ventory/constaints.dart';
 import 'package:ventory/pages/entradas/por_nota_fiscal/por_nota_fiscal_controller.dart';
 import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector.dart';
-import 'package:ventory/shared/components/primary_button.dart';
 
 import 'package:flutter/services.dart';
 import 'package:ventory/shared/components/yes_no_component.dart';
@@ -60,7 +59,7 @@ class PorNotaFiscalPage extends StatelessWidget {
                         TextFormField(
                             initialValue: _controller.nota.value,
                             keyboardType: TextInputType.number,
-                            textInputAction: TextInputAction.next,
+                            textInputAction: TextInputAction.done,
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.allow(
                                   RegExp(r'[0-9]')),
@@ -78,7 +77,7 @@ class PorNotaFiscalPage extends StatelessWidget {
         ),
         bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: PrimaryButton(
+            child: ElevatedButton(
                 onPressed: () {
                   if (_formKey1.currentState!.validate()) {
                     _controller.checkNota();
@@ -194,7 +193,7 @@ class PorNotaFiscalPage extends StatelessWidget {
             ),
             bottomNavigationBar: Padding(
                 padding: const EdgeInsets.all(4.0),
-                child: PrimaryButton(
+                child: ElevatedButton(
                     onPressed: () {
                       _controller.pageController.animateToPage(2,
                           duration: const Duration(milliseconds: 300),
@@ -301,7 +300,7 @@ class PorNotaFiscalPage extends StatelessWidget {
                                 initialValue: _controller.observacao.value,
                                 keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.next,
-                                minLines: 2,
+                                minLines: 1,
                                 maxLines: 5,
                                 validator: (value) =>
                                     value.toString().isNotEmpty
@@ -317,7 +316,7 @@ class PorNotaFiscalPage extends StatelessWidget {
                             TextFormField(
                                 initialValue:
                                     _controller.outrasInformacoes.value,
-                                minLines: 2,
+                                minLines: 1,
                                 maxLines: 5,
                                 keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.done,
@@ -332,16 +331,12 @@ class PorNotaFiscalPage extends StatelessWidget {
                 )),
             bottomNavigationBar: Padding(
                 padding: const EdgeInsets.all(4.0),
-                child: PrimaryButton(
+                child: ElevatedButton(
                     onPressed: () {
                       if (_formKey2.currentState!.validate()) {
                         _controller.showConfirm();
                       }
-                      //_controller.pageController.jumpToPage(2);
                     },
-                    child: const Text(
-                      "Confirmar",
-                      style: TextStyle(fontSize: 18),
-                    )))));
+                    child: const Text("Confirmar")))));
   }
 }

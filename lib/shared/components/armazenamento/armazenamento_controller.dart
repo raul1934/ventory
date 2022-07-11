@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ventory/shared/components/armazenamento/armazenamento_model.dart';
 import 'package:ventory/shared/controllers/base_controller.dart';
@@ -14,35 +13,50 @@ class ArmazenamentoController extends BaseController {
   loadArmazenamentos() async {
     toggleLoading(true);
 
-    var ret = await _armazenamentoService.loadArmazenamento();
-
-    List<ArmazenamentoModel> retList = <ArmazenamentoModel>[];
-    for (Map<String, dynamic> item in ret["data"]) {
-      retList.add(ArmazenamentoModel.fromJson(item));
-    }
-    armazenamentoModel(retList);
+    var result = await _armazenamentoService.loadArmazenamento();
 
     toggleLoading(false);
+
+    if (!result["error"]) {
+      List<ArmazenamentoModel> retList = <ArmazenamentoModel>[];
+      for (Map<String, dynamic> item in result["data"]) {
+        retList.add(ArmazenamentoModel.fromJson(item));
+      }
+      armazenamentoModel(retList);
+    } else {
+      Get.closeAllSnackbars();
+      Get.back();
+      Dialogs.showResponseDialog(result["exception"]);
+    }
   }
 
   addArmazenamento(String label, String companyDoc, int parentId) async {
     toggleLoading(true);
-    dynamic ret = await _armazenamentoService.addArmazenamento(
+
+    var result = await _armazenamentoService.addArmazenamento(
         label, companyDoc, parentId);
 
-    if (ret["message"] != null) {
-      Dialogs.showAlertDialog("Houve um problema", ret["message"]);
-    }
-
     toggleLoading(false);
+    if (!result["error"]) {
+      if (result["message"] != null) {
+        Dialogs.showErrorDialog("Houve um problema", result["message"]);
+      }
+    } else {
+      Dialogs.showResponseDialog(result["exception"]);
+    }
   }
 
   deleteArmazenamento(int id) async {
     toggleLoading(true);
-    dynamic ret = await _armazenamentoService.deleteArmazenamento(id);
-    if (ret["message"] != null) {
-      Dialogs.showAlertDialog("Houve um problema", ret["message"]);
-    }
+    dynamic result = await _armazenamentoService.deleteArmazenamento(id);
     toggleLoading(false);
+
+    if (!result["error"]) {
+      if (result["message"] != null) {
+        Dialogs.showErrorDialog("Houve um problema", result["message"]);
+      }
+    } else {
+      Dialogs.showResponseDialog(result["exception"]);
+    }
   }
 }

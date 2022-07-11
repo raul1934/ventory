@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ventory/constaints.dart';
 import 'package:ventory/pages/saidas/saida/saida_controller.dart';
 import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector.dart';
-import 'package:ventory/shared/components/primary_button.dart';
+
 import 'package:ventory/shared/components/products/armazenamento_input_selector.dart';
 import 'package:ventory/shared/components/products/armazenamento_input_selector_model.dart';
 
@@ -138,7 +138,7 @@ class SaidaPage extends StatelessWidget {
               ),
               bottomNavigationBar: Padding(
                   padding: const EdgeInsets.all(4.0),
-                  child: PrimaryButton(
+                  child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _controller.showConfirm();

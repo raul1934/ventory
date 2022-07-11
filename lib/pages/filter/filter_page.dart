@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ventory/pages/filter/movimentation/movimentation_page.dart';
 import 'package:ventory/pages/filter/saldo/saldo_page.dart';
-import 'package:ventory/shared/components/primary_button.dart';
+
 import '../../shared/components/drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +12,7 @@ class FilterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         drawer: DrawerComponent(
           selectedIndex: 2,
@@ -42,19 +43,23 @@ class FilterPage extends StatelessWidget {
                       ),
                     )),
                 const SizedBox(height: 20),
-                PrimaryButton(
-                  onPressed: (() {
-                    Get.to(() => const SaldoPage());
-                  }),
-                  child: const Text("SALDO"),
-                ),
+                SizedBox(
+                    child: ElevatedButton(
+                      onPressed: (() {
+                        Get.to(() => const SaldoPage());
+                      }),
+                      child: const Text("SALDO"),
+                    ),
+                    width: size.width * 0.9),
                 const SizedBox(height: 20),
-                PrimaryButton(
-                  onPressed: (() {
-                    Get.to(() => MovimentationPage());
-                  }),
-                  child: const Text("INVENTÁRIO"),
-                ),
+                SizedBox(
+                    child: ElevatedButton(
+                      onPressed: (() {
+                        Get.to(() => MovimentationPage());
+                      }),
+                      child: const Text("INVENTÁRIO"),
+                    ),
+                    width: size.width * 0.9),
               ],
             ))));
   }
