@@ -1,5 +1,5 @@
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:ventory/pages/splashscreen/spash_screen_controller.dart';
+import 'package:base_app/pages/splashscreen/spash_screen_controller.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
 

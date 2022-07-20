@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:ventory/constaints.dart';
-import 'package:ventory/pages/login/login_page.dart';
-import 'package:ventory/shared/components/dialogs.dart';
+import 'package:base_app/constaints.dart';
+import 'package:base_app/pages/login/login_page.dart';
+import 'package:base_app/shared/components/dialogs.dart';
 
 class NetService {
   static Future get(String url) async {

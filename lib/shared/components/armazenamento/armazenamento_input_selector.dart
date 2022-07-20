@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ventory/shared/components/armazenamento/armazenamento.dart';
-import 'package:ventory/shared/components/armazenamento/armazenamento_controller.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento_controller.dart';
 
 import '../../../constaints.dart';
 import 'armazenamento_input_selector_model.dart';

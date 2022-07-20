@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:ventory/pages/entradas/por_nota_fiscal/por_nota_fiscal_page.dart';
+import 'package:base_app/pages/entradas/por_nota_fiscal/por_nota_fiscal_page.dart';
 import 'package:flutter/material.dart';
-import 'package:ventory/shared/components/drawer.dart';
+import 'package:base_app/shared/components/drawer.dart';
 
 import '../../constaints.dart';
 
@@ -19,7 +19,7 @@ class EntradasPage extends StatelessWidget {
           backgroundColor: primaryColor,
           foregroundColor: primaryTextColor,
           centerTitle: true,
-          title: const Text("Ventory"),
+          title: const Text("base_app"),
           elevation: 1,
         ),
         body: SingleChildScrollView(

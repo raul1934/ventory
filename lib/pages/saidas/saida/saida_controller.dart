@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ventory/pages/saidas/saida/models/saida_result.dart';
-import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector_model.dart';
-import 'package:ventory/shared/components/dialogs.dart';
-import 'package:ventory/shared/components/products/armazenamento_input_selector_model.dart';
-import 'package:ventory/shared/controllers/base_controller.dart';
-import 'package:ventory/shared/mixins/loader_mixin.dart';
-import 'package:ventory/shared/models/storage_items_result.dart';
-import 'package:ventory/shared/services/products_service.dart';
+import 'package:base_app/pages/saidas/saida/models/saida_result.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento_input_selector_model.dart';
+import 'package:base_app/shared/components/dialogs.dart';
+import 'package:base_app/shared/components/products/armazenamento_input_selector_model.dart';
+import 'package:base_app/shared/controllers/base_controller.dart';
+import 'package:base_app/shared/mixins/loader_mixin.dart';
+import 'package:base_app/shared/models/storage_items_result.dart';
+import 'package:base_app/shared/services/products_service.dart';
 import 'package:intl/intl.dart';
 
-import 'package:ventory/shared/services/saidas_service.dart';
+import 'package:base_app/shared/services/saidas_service.dart';
 
 class SaidaController extends BaseController with LoaderMixin {
   final armazenamento = ArmazenamentoInputSelectorModel().obs;

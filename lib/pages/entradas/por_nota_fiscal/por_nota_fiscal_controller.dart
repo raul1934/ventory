@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ventory/pages/entradas/por_nota_fiscal/models/nota_fiscal_result.dart';
-import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector_model.dart';
-import 'package:ventory/shared/components/dialogs.dart';
-import 'package:ventory/shared/controllers/base_controller.dart';
-import 'package:ventory/shared/mixins/loader_mixin.dart';
-import 'package:ventory/shared/models/receipt_request_model.dart';
-import 'package:ventory/shared/models/receipt_response_model.dart';
-import 'package:ventory/shared/services/entradas_por_nota_fiscal_service.dart';
+import 'package:base_app/pages/entradas/por_nota_fiscal/models/nota_fiscal_result.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento_input_selector_model.dart';
+import 'package:base_app/shared/components/dialogs.dart';
+import 'package:base_app/shared/controllers/base_controller.dart';
+import 'package:base_app/shared/mixins/loader_mixin.dart';
+import 'package:base_app/shared/models/receipt_request_model.dart';
+import 'package:base_app/shared/models/receipt_response_model.dart';
+import 'package:base_app/shared/services/entradas_por_nota_fiscal_service.dart';
 
 class PorNotaFiscalController extends BaseController with LoaderMixin {
   final armazenamento = ArmazenamentoInputSelectorModel().obs;

@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ventory/pages/filter/filter_page.dart';
-import 'package:ventory/pages/saidas/saidas_page.dart';
+import 'package:base_app/pages/filter/filter_page.dart';
+import 'package:base_app/pages/saidas/saidas_page.dart';
 
 import '../../pages/dashboard/dashboard_page.dart';
 

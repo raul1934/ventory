@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:ventory/pages/filter/movimentation/movimentation_page.dart';
-import 'package:ventory/pages/filter/saldo/saldo_page.dart';
+import 'package:base_app/pages/filter/movimentation/movimentation_page.dart';
+import 'package:base_app/pages/filter/saldo/saldo_page.dart';
 
 import '../../shared/components/drawer.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class FilterPage extends StatelessWidget {
           backgroundColor: primaryColor,
           foregroundColor: primaryTextColor,
           centerTitle: true,
-          title: const Text("Ventory"),
+          title: const Text("base_app"),
           elevation: 1,
           actions: const [],
         ),

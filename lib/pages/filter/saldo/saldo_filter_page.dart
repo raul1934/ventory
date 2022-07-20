@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:ventory/constaints.dart';
-import 'package:ventory/pages/filter/saldo/saldo_controller.dart';
-import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector.dart';
+import 'package:base_app/constaints.dart';
+import 'package:base_app/pages/filter/saldo/saldo_controller.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento_input_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:ventory/shared/components/loader.dart';
+import 'package:base_app/shared/components/loader.dart';
 
-import 'package:ventory/shared/components/products/armazenamento_input_selector.dart';
-import 'package:ventory/shared/components/products/armazenamento_input_selector_model.dart';
+import 'package:base_app/shared/components/products/armazenamento_input_selector.dart';
+import 'package:base_app/shared/components/products/armazenamento_input_selector_model.dart';
 
 class SaldoFilterPage extends StatelessWidget {
   const SaldoFilterPage({Key? key}) : super(key: key);

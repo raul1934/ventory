@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:animated_tree_view/animated_tree_view.dart';
 import 'package:get/get.dart';
-import 'package:ventory/constaints.dart';
-import 'package:ventory/shared/components/armazenamento/armazenamento_model.dart';
+import 'package:base_app/constaints.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento_model.dart';
 
 import 'armazenamento_controller.dart';
 import 'armazenamento_input_selector_model.dart';

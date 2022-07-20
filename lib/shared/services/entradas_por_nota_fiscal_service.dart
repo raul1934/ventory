@@ -1,5 +1,5 @@
 import 'package:get_storage/get_storage.dart';
-import 'package:ventory/shared/models/receipt_request_model.dart';
+import 'package:base_app/shared/models/receipt_request_model.dart';
 
 import '../../shared/services/net_service.dart';
 import '../../constaints.dart';

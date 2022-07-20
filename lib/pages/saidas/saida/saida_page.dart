@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ventory/constaints.dart';
-import 'package:ventory/pages/saidas/saida/saida_controller.dart';
-import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector.dart';
+import 'package:base_app/constaints.dart';
+import 'package:base_app/pages/saidas/saida/saida_controller.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento_input_selector.dart';
 
-import 'package:ventory/shared/components/products/armazenamento_input_selector.dart';
-import 'package:ventory/shared/components/products/armazenamento_input_selector_model.dart';
+import 'package:base_app/shared/components/products/armazenamento_input_selector.dart';
+import 'package:base_app/shared/components/products/armazenamento_input_selector_model.dart';
 
 import 'package:flutter/services.dart';
 

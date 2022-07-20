@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ventory/constaints.dart';
+import 'package:base_app/constaints.dart';
 
 mixin LoaderMixin on GetxController {
   void loaderListener(RxBool loaderRx) {

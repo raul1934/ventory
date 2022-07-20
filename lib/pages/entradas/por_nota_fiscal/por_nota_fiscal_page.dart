@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ventory/constaints.dart';
-import 'package:ventory/pages/entradas/por_nota_fiscal/por_nota_fiscal_controller.dart';
-import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector.dart';
+import 'package:base_app/constaints.dart';
+import 'package:base_app/pages/entradas/por_nota_fiscal/por_nota_fiscal_controller.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento_input_selector.dart';
 
 import 'package:flutter/services.dart';
-import 'package:ventory/shared/components/yes_no_component.dart';
+import 'package:base_app/shared/components/yes_no_component.dart';
 
 class PorNotaFiscalPage extends StatelessWidget {
   PorNotaFiscalPage({Key? key}) : super(key: key);

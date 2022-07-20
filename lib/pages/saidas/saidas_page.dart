@@ -1,4 +1,4 @@
-import 'package:ventory/pages/saidas/saida/saida_page.dart';
+import 'package:base_app/pages/saidas/saida/saida_page.dart';
 
 import '../../shared/components/drawer.dart';
 import '../../shared/controllers/app_controller.dart';
@@ -22,7 +22,7 @@ class SaidasPage extends StatelessWidget {
           backgroundColor: primaryColor,
           foregroundColor: primaryTextColor,
           centerTitle: true,
-          title: const Text("Ventory"),
+          title: const Text("base_app"),
           elevation: 1,
         ),
         body: SingleChildScrollView(

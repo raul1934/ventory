@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ventory/shared/components/armazenamento/armazenamento_input_selector_model.dart';
-import 'package:ventory/shared/components/dialogs.dart';
-import 'package:ventory/shared/components/products/armazenamento_input_selector_model.dart';
-import 'package:ventory/shared/controllers/base_controller.dart';
-import 'package:ventory/shared/mixins/loader_mixin.dart';
-import 'package:ventory/shared/services/products_service.dart';
-import 'package:ventory/shared/services/saldo_service.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento_input_selector_model.dart';
+import 'package:base_app/shared/components/dialogs.dart';
+import 'package:base_app/shared/components/products/armazenamento_input_selector_model.dart';
+import 'package:base_app/shared/controllers/base_controller.dart';
+import 'package:base_app/shared/mixins/loader_mixin.dart';
+import 'package:base_app/shared/services/products_service.dart';
+import 'package:base_app/shared/services/saldo_service.dart';
 import 'models/saldo_filter_result.dart';
 import 'models/storage_items_result.dart';
 

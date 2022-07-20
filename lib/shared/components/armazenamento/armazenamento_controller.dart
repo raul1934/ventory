@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:ventory/shared/components/armazenamento/armazenamento_model.dart';
-import 'package:ventory/shared/controllers/base_controller.dart';
-import 'package:ventory/shared/services/armazenamento_service.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento_model.dart';
+import 'package:base_app/shared/controllers/base_controller.dart';
+import 'package:base_app/shared/services/armazenamento_service.dart';
 
 import '../dialogs.dart';
 

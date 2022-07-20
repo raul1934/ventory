@@ -1,4 +1,4 @@
-import 'package:ventory/shared/components/armazenamento/armazenamento.dart';
+import 'package:base_app/shared/components/armazenamento/armazenamento.dart';
 
 import '../../shared/components/drawer.dart';
 import '../../shared/controllers/app_controller.dart';
@@ -24,7 +24,7 @@ class DashboardPage extends StatelessWidget {
           backgroundColor: primaryColor,
           foregroundColor: primaryTextColor,
           centerTitle: true,
-          title: const Text("Ventory"),
+          title: const Text("base_app"),
           elevation: 1,
           actions: [
             IconButton(

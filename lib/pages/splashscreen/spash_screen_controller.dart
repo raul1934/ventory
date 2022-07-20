@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ventory/shared/components/dialogs.dart';
+import 'package:base_app/shared/components/dialogs.dart';
 import '../../pages/dashboard/dashboard_page.dart';
 import '../../shared/controllers/app_controller.dart';
 import '../../shared/services/login_service.dart';

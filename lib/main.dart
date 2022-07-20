@@ -22,34 +22,34 @@ main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const MaterialColor ventory =
-      MaterialColor(_ventoryPrimaryValue, <int, Color>{
+  static const MaterialColor base_app =
+      MaterialColor(_base_appPrimaryValue, <int, Color>{
     50: Color(0xFFE7F5EE),
     100: Color(0xFFC3E7D5),
     200: Color(0xFF9BD7BA),
     300: Color(0xFF73C79E),
     400: Color(0xFF55BB89),
-    500: Color(_ventoryPrimaryValue),
+    500: Color(_base_appPrimaryValue),
     600: Color(0xFF31A86C),
     700: Color(0xFF2A9F61),
     800: Color(0xFF239657),
     900: Color(0xFF168644),
   });
-  static const int _ventoryPrimaryValue = 0xFF37AF74;
+  static const int _base_appPrimaryValue = 0xFF37AF74;
 
-  static const MaterialColor ventoryAccent =
-      MaterialColor(_ventoryAccentValue, <int, Color>{
+  static const MaterialColor base_appAccent =
+      MaterialColor(_base_appAccentValue, <int, Color>{
     100: Color(0xFFBCFFD5),
-    200: Color(_ventoryAccentValue),
+    200: Color(_base_appAccentValue),
     400: Color(0xFF56FF95),
     700: Color(0xFF3CFF86),
   });
-  static const int _ventoryAccentValue = 0xFF89FFB5;
+  static const int _base_appAccentValue = 0xFF89FFB5;
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: 'ventory Plus',
+        title: 'base_app Plus',
         home: SplashScreenPage(),
         initialBinding: AppBinding(),
         debugShowCheckedModeBanner: false,
@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         theme: ThemeData(
-            primaryColor: ventory,
+            primaryColor: base_app,
             colorScheme: const ColorScheme.light(primary: primaryColor),
             visualDensity: VisualDensity.adaptivePlatformDensity,
             elevatedButtonTheme: ElevatedButtonThemeData(
